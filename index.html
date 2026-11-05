@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>For Eti</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Pinyon+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button
+      id="mute"
+      class="mute"
+      type="button"
+      aria-label="Pause music"
+      hidden
+    >
+      ♪
+    </button>
+    <p id="musicError" class="musicError" hidden></p>
+    <div id="petals" aria-hidden="true"></div>
+
+    <main>
+      <!-- 1. Sealed envelope -->
+      <section id="intro" class="screen on">
+        <h1 class="script">For Eti</h1>
+        <div class="envelope">
+          <div class="pocket"></div>
+          <div class="flap"></div>
+          <button
+            id="start"
+            class="seal"
+            type="button"
+            aria-label="Break the seal and start"
+          >
+            E
+          </button>
+        </div>
+        <p class="text">
+          There is a letter inside. Before you read it, win one small game.
+        </p>
+        <p class="hint">Tap the seal</p>
+      </section>
+
+      <!-- 2. Memory game -->
+      <section id="game" class="screen">
+        <h2 class="script">Find the pairs</h2>
+        <p class="text" id="moves">Moves: 0</p>
+        <div id="board" class="board"></div>
+      </section>
+
+      <!-- 3. Win: open the envelope -->
+      <section id="win" class="screen">
+        <h2 class="script">You did it, Eti</h2>
+        <div class="envelope" id="env">
+          <div class="pocket"></div>
+          <div class="flap"></div>
+          <button
+            id="open"
+            class="seal"
+            type="button"
+            aria-label="Open the letter"
+          >
+            E
+          </button>
+        </div>
+        <p class="text">Now you may open it.</p>
+      </section>
+
+      <!-- 4. The letter -->
+      <section id="letter" class="screen">
+        <article class="paper">
+          <h2 class="script" id="dear"></h2>
+          <div id="lines"></div>
+          <p class="sign script" id="sign"></p>
+          <p class="ps" id="ps"></p>
+          <button id="meToo" class="btn" type="button" hidden>Me too</button>
+          <p class="end script" id="end" hidden>See you soon, Eti</p>
+        </article>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

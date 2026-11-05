@@ -1,0 +1,333 @@
+:root {
+  --wine: #2a0a17;
+  --wine2: #4a1226;
+  --blush: #f9e1e4;
+  --rose: #d9647e;
+  --gold: #e2b25a;
+  --ink: #4a1226;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--blush);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.25rem;
+  background:
+    radial-gradient(ellipse at 50% 0, #6a1d3a 0, transparent 60%), var(--wine);
+  background-attachment: fixed;
+}
+main {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1.2rem 3rem;
+}
+.screen {
+  display: none;
+  width: min(100%, 34rem);
+  text-align: center;
+}
+.screen.on {
+  display: block;
+  animation: in 1.2s ease both;
+}
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.script {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  color: var(--gold);
+  margin: 0 0 0.6rem;
+  line-height: 1.1;
+}
+h1.script {
+  font-size: clamp(4rem, 20vw, 6.5rem);
+}
+h2.script {
+  font-size: clamp(2.4rem, 11vw, 3.6rem);
+}
+.text {
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 1.4rem auto 0;
+  max-width: 24rem;
+}
+.hint {
+  margin: 0.8rem 0 0;
+  font-size: 1rem;
+  color: #d9a9b4;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+/* envelope */
+.envelope {
+  position: relative;
+  width: min(78vw, 22rem);
+  aspect-ratio: 3/2;
+  margin: 1.4rem auto 0;
+  background: #c9506b;
+  border-radius: 6px;
+  box-shadow: 0 24px 50px #0008;
+}
+.pocket {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: #e3869a;
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  z-index: 1;
+}
+.flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62%;
+  background: #d9647e;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition:
+    transform 0.9s ease,
+    z-index 0s 0.45s;
+  z-index: 2;
+}
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  z-index: 3;
+  width: 3.8rem;
+  height: 3.8rem;
+  margin: -1.9rem 0 0 -1.9rem;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  background: radial-gradient(circle at 35% 30%, #b8284a, #7a1230);
+  color: var(--gold);
+  font:
+    2rem "Pinyon Script",
+    cursive;
+  box-shadow:
+    0 4px 10px #0007,
+    inset 0 0 0 3px #ffffff1c;
+  animation: beat 2.4s ease-in-out infinite;
+}
+.envelope.open .seal {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes beat {
+  50% {
+    transform: scale(1.08);
+  }
+}
+.seal:focus-visible,
+.card:focus-visible,
+.btn:focus-visible,
+.mute:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+/* game */
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 0.7rem;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+  font-size: 2.2rem;
+}
+.back {
+  background: linear-gradient(145deg, #5c1830, #3a0f21);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font:
+    2rem "Pinyon Script",
+    cursive;
+}
+.front {
+  background: var(--blush);
+  transform: rotateY(180deg);
+}
+.card.open .back {
+  transform: rotateY(180deg);
+}
+.card.open .front {
+  transform: rotateY(0);
+}
+.card.done .front {
+  background: #f6c3cd;
+  box-shadow: 0 0 18px #e2b25a88;
+}
+/* letter */
+.paper {
+  padding: 2.2rem 1.6rem;
+  border-radius: 0.4rem;
+  background: var(--blush);
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 30px 60px #000a;
+  line-height: 1.6;
+}
+.paper .script {
+  color: #9e2848;
+}
+.paper p {
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
+}
+.line {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 1.4s,
+    transform 1.4s;
+}
+.line.show {
+  opacity: 1;
+  transform: none;
+}
+.sign {
+  text-align: right;
+  font-size: 2.4rem !important;
+  margin-top: 1.2rem !important;
+}
+.ps {
+  font-style: italic;
+  font-size: 1.1rem !important;
+  opacity: 0;
+  transition: opacity 1.4s;
+}
+.ps.show {
+  opacity: 1;
+}
+.btn {
+  display: block;
+  margin: 1.4rem auto 0;
+  padding: 0.8rem 2.4rem;
+  border: 0;
+  border-radius: 3rem;
+  background: #9e2848;
+  color: var(--blush);
+  font:
+    italic 500 1.4rem "Cormorant Garamond",
+    serif;
+  cursor: pointer;
+  animation: beat 2s infinite;
+}
+.end {
+  text-align: center;
+  font-size: 3rem;
+  margin: 1.4rem 0 0;
+}
+/* petals */
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+.petal {
+  position: absolute;
+  top: -30px;
+  width: 14px;
+  height: 18px;
+  background: #d9647e;
+  border-radius: 80% 0 80% 0;
+  opacity: 0.85;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translate(var(--dx), 110vh) rotate(var(--rot));
+  }
+}
+/* music */
+.mute {
+  position: fixed;
+  right: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--wine2);
+  color: var(--gold);
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 10;
+}
+.mute.off {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+.musicError {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  top: max(0.8rem, env(safe-area-inset-top, 0px));
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  background: var(--blush);
+  color: var(--ink);
+  font-size: 1rem;
+  text-align: center;
+  z-index: 11;
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen.on,
+  .seal,
+  .btn,
+  .hint {
+    animation: none;
+  }
+  .face,
+  .flap,
+  .line,
+  .ps {
+    transition: none;
+  }
+  #petals {
+    display: none;
+  }
+}
